@@ -28,6 +28,7 @@ MessageHandler.prototype.handle = function(message) {
         if (handler !== undefined) {
             commandObject.db = db
             commandObject.message = message
+            commandObject.user = message.author
             handler(commandObject)
         }
     }
