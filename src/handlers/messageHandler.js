@@ -26,7 +26,9 @@ MessageHandler.prototype.handle = function(message) {
     if (commandObject != null) {
         handler = commands[commandObject.directive]
         if (handler !== undefined) {
-            handler(message)
+            commandObject.db = db
+            commandObject.message = message
+            handler(commandObject)
         }
     }
 }

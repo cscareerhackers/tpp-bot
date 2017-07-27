@@ -13,7 +13,21 @@ function newLeetcodeSolution(solution) {
     })
 }
 
+function searchSolution(problem) {
+    MongoClient.connect(props.dbUri, function(err, db) {
+        cursor = db.collection('leetcode').find(
+            {
+                number: problem + ''
+            }
+        )
+        cursor.each(function(err, item) {
+            console.log(item)
+        })
+    })
+}
+
 module.exports = {
-    leetcodeSolution: newLeetcodeSolution
+    addLeetcode: newLeetcodeSolution,
+    searchLeetcode: searchSolution
 }
 
