@@ -1,0 +1,7 @@
+bot:
+  token: "PLACEHOLDER"
+
+channels:
+ - "PLACEHOLDER"
+
+debug: true

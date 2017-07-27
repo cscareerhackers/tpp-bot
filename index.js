@@ -1,23 +1,15 @@
 var Discord = require('discord.js')
-var properties = require('properties')
+var props = require('./utils/props')
+
 var client = new Discord.Client()
 
-var token = 'PLACEHOLDER'
-
-properties.parse('props', { path: true }, function (err, obj) {
-  if (err) return console.error(err)
-
-  token = obj['discord_bot_token']
-  client.login(token)
-})  
-
-client.on('ready', () => {
-  console.log('READY!')
+client.on('message', function(message) {
+   
 })
 
-client.on('message', message => {
-  if (message.content === 'tpp')
-    message.channel.send('bot test')
+client.login(props.token)
 
-})
-
+if (props.debug) {
+    const repl = require('repl')
+    repl.start('> ').context.client = client
+}

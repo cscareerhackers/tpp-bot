@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.1.0",
-    "properties": "^1.2.1"
+    "properties": "^1.2.1",
+    "yamljs": "^0.3.0"
   }
 }
