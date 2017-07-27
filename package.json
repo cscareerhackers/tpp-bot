@@ -1,16 +1,34 @@
 {
   "name": "tpp-bot",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "## setup - `cp props-template.yml props.yml` - change appropriate variables",
   "main": "index.js",
   "scripts": {
+    "start": "node src/bot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "snta",
+  "license": "MIT",
   "dependencies": {
+    "aws-sdk": "^2.91.0",
     "discord.js": "^11.1.0",
-    "properties": "^1.2.1",
+    "exit-hook": "^1.1.1",
+    "mongodb": "^2.2.30",
     "yamljs": "^0.3.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snta/tpp-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "programming",
+    "leetcode"
+  ],
+  "bugs": {
+    "url": "https://github.com/snta/tpp-bot/issues"
+  },
+  "homepage": "https://github.com/snta/tpp-bot#readme"
 }

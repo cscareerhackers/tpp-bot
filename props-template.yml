@@ -1,7 +1,10 @@
 bot:
-  token: "PLACEHOLDER"
+    token: "PLACEHOLDER"
 
 channels:
- - "PLACEHOLDER"
+    - "PLACEHOLDER"
 
+mongodb:
+    uri: "mongodb://placeholder"
+    
 debug: true
