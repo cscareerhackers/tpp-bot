@@ -18,11 +18,12 @@ function parse(text) {
     }
     
     splitted = text.split(' ')
+    directive = splitted[0].replace(/\$/g, '')
     if (splitted.length == 1) { // single word
-        return new CommandObject(splitted[0], [])
+        return new CommandObject(directive, [])
     }        
     args = splitted.slice(1)
-    return new CommandObject(splitted[0], args)
+    return new CommandObject(directive, args)
 }
 
 module.exports = parse
