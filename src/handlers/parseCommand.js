@@ -13,15 +13,15 @@ class CommandObject {
 }
 
 function parse(text) {
-    if (!text.startsWith('$')) {
+    if (!text.startsWith('!leetcode')) {
         return null
     }
     
-    splitted = text.split(' ')
-    directive = splitted[0].replace(/\$/g, '')
+    splitted = text.split(' ').slice(1)
+    directive = splitted[0]
     if (splitted.length == 1) { // single word
         return new CommandObject(directive, [])
-    }        
+    }
     args = splitted.slice(1)
     return new CommandObject(directive, args)
 }

@@ -7,5 +7,7 @@ module.exports = {
     token: props.bot.token,
     channels: props.channels,
     dbUri: props.mongodb.uri,
-    debug: props.debug
+    debug: props.debug,
+    cooldown: props.commands.cooldown,
+    disabledCommands: new Set(props.commands.disabled)
 }

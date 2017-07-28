@@ -1,4 +1,6 @@
 var props = require('./props')
+var mongoose = require('./mongoose')
+var LeetcodeSolution = require('../models/leetcodeSolution')
 var MongoClient = require('mongodb').MongoClient
 
 function newLeetcodeSolution(solution) {
@@ -33,7 +35,7 @@ function drop() {
         db.collection('leetcode').drop()
     })
 }
- 
+
 module.exports = {
     addLeetcode: newLeetcodeSolution,
     searchLeetcode: searchSolution,

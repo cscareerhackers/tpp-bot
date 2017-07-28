@@ -10,26 +10,27 @@ function isAuthorized(user) {
 
 module.exports = {
     source: function(command) {
-        command.message.channel.send('HELP A BROTHA OUT: https://github.com/snta/tpp-bot')
+        command.message.reply('HELP A BROTHA OUT: https://github.com/snta/tpp-bot')
     },
     ping: function(command) {
-        command.message.channel.send('pong')
+        command.message.reply('pong')
     },
     add: function(command) {
         if (isAuthorized(command.user)) {
-            var solution = new LeetcodeSolution(command.arg(0), command.arg(1))
+            var solution = new LeetcodeSolution({
+                problemNumber: parseInt(command.arg(0)),
+                link: command.arg(1),
+                submitter: command.user.name
+            })
             command.db.addLeetcode(solution)
-            command.message.channel.send("added")
+            command.message.reply("Added a new solution for Leetcode #" + command.arg(0))
         } else {
-            command.message.channel.send("you can't add solutions!")
+            command.message.reply("You can't do that.")
         }
-    }, 
+    },
     search: function(command) {
         command.db.searchLeetcode(parseInt(command.arg(0)), function(item) {
-            command.message.channel.send(`solution: ${item.link}`)
+            command.message.reply(`Solution by ${item.submitter}: ${item.link}`)
         })
     },
-    help: function(command) {
-        command.message.channel.send('commands: $help, $ping, $source')
-    }
 }
