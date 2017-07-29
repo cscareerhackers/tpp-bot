@@ -12,9 +12,6 @@ module.exports = {
     source: function(command) {
         command.message.reply('Please issue a PR if you can contribute! https://github.com/snta/tpp-bot')
     },
-    ping: function(command) {
-        command.message.reply('pong')
-    },
     add: function(command) {
         if (isAuthorized(command.user)) {
             var solution = new LeetcodeSolution({

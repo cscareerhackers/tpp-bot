@@ -1,10 +1,22 @@
-bot:
-    token: "PLACEHOLDER"
-
-channels:
+authorizedUsers:
     - "PLACEHOLDER"
 
+bot:
+    token: "TOKEN"
+
+channels:
+    - "lol"
+
+commands:
+    cooldown: 5000 # in millis
+    disabled:
+        - "disabled"
+
 mongodb:
-    uri: "mongodb://placeholder"
-    
+    collection: "leetcode"
+    uri: "mongodb://localhost"
+
 debug: true
+
+leetcode:
+    url: "https://leetcode.com/api/problems/all/"
