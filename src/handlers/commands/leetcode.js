@@ -1,6 +1,6 @@
-var props = require('../utils/props')
-var LeetcodeSolution = require('../models/leetcodeSolution')
-var leetcode = require('../utils/leetcode')
+var props = require('../../utils/props')
+var leetcode = require('../../utils/leetcode')
+var LeetcodeSolution = require('../../models/leetcodeSolution')
 
 var authorizedUsers = new Set(props.authorizedUsers)
 
@@ -9,8 +9,11 @@ function isAuthorized(user) {
 }
 
 module.exports = {
-    source: function(command) {
-        command.message.reply('Please issue a PR if you can contribute! https://github.com/snta/tpp-bot')
+    help: function(command) {
+        command.message.channel.send(`Available commands:
+            !leetcode add <problem> <solution> - Adds a solution to the database.
+            !leetcode search <problem> - Lists all available solutions to a problem.
+            !leetcode daily - Provides a link to today's daily question.`)
     },
     add: function(command) {
         if (isAuthorized(command.user)) {

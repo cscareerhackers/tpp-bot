@@ -1,5 +1,5 @@
+var controllers = require('./controllers')
 var parseCommand = require('./parseCommand')
-var commands = require('./commands')
 var rateLimiter = require('./rateLimiter')
 
 function MessageHandler(client, channels) {
@@ -23,11 +23,16 @@ MessageHandler.prototype.handle = function(message) {
             message.reply("You're not allowed to do that yet! Please wait a few seconds and try again.")
             return
         }
-        handler = commands[commandObject.directive]
+        var controller = commandObject.controller
+        var directive = commandObject.directive
+        handler = controller[directive] !== undefined ? controller[directive] : controller['help']
+
         if (handler !== undefined) {
             commandObject.message = message
             commandObject.user = message.author
             handler(commandObject)
+        } else {
+            message.reply("Sorry, I didn't understand that!")
         }
     }
 }
