@@ -59,12 +59,14 @@ module.exports = {
     },
     search: function(command) {
         LeetcodeSolution.find({ problemNumber: parseInt(command.arg(0))}, (err, result) => {
-            result.forEach((res) => {
-                command.message.channel.send(`Approved solution, submitted by <@${res.submitter}>: ${res.link}`)
-                if (isAuthorized(command.user)) {
-                    command.message.reply(`ID: ${res._id}`)
-                }
-            })
+            if (result) {
+                result.forEach((res) => {
+                    command.message.channel.send(`Approved solution, submitted by <@${res.submitter}>: ${res.link}`)
+                    if (isAuthorized(command.user)) {
+                        command.message.reply(`ID: ${res._id}`)
+                    }
+                })
+            }
         })
 
         LeetcodeSubmission.find({ problemNumber: parseInt(command.arg(0))}, (err, result) => {
