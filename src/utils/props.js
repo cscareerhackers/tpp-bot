@@ -9,5 +9,6 @@ module.exports = {
     dbUri: props.mongodb.uri,
     debug: props.debug,
     cooldown: props.commands.cooldown,
-    disabledCommands: new Set(props.commands.disabled)
+    disabledCommands: new Set(props.commands.disabled),
+    leetcodeUrl: props.leetcode.url
 }

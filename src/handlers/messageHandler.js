@@ -1,4 +1,3 @@
-var db = require('../utils/db')
 var parseCommand = require('./parseCommand')
 var commands = require('./commands')
 var rateLimiter = require('./rateLimiter')
@@ -26,7 +25,6 @@ MessageHandler.prototype.handle = function(message) {
         }
         handler = commands[commandObject.directive]
         if (handler !== undefined) {
-            commandObject.db = db
             commandObject.message = message
             commandObject.user = message.author
             handler(commandObject)

@@ -1,6 +1,6 @@
-var db = require('../utils/db')
 var props = require('../utils/props')
 var LeetcodeSolution = require('../models/leetcodeSolution')
+var leetcode = require('../utils/leetcode')
 
 var authorizedUsers = new Set(props.authorizedUsers)
 
@@ -10,7 +10,7 @@ function isAuthorized(user) {
 
 module.exports = {
     source: function(command) {
-        command.message.reply('HELP A BROTHA OUT: https://github.com/snta/tpp-bot')
+        command.message.reply('Please issue a PR if you can contribute! https://github.com/snta/tpp-bot')
     },
     ping: function(command) {
         command.message.reply('pong')
@@ -20,17 +20,33 @@ module.exports = {
             var solution = new LeetcodeSolution({
                 problemNumber: parseInt(command.arg(0)),
                 link: command.arg(1),
-                submitter: command.user.name
+                submitter: command.user.id
             })
-            command.db.addLeetcode(solution)
-            command.message.reply("Added a new solution for Leetcode #" + command.arg(0))
+            solution.save(function (err) {
+                if (err) {
+                    command.message.channel.send("Error indexing solution. Please resubmit later.")
+                } else {
+                    command.message.channel.send("Added a new solution for Leetcode #" + command.arg(0))
+                }
+            })
         } else {
             command.message.reply("You can't do that.")
         }
     },
     search: function(command) {
-        command.db.searchLeetcode(parseInt(command.arg(0)), function(item) {
-            command.message.reply(`Solution by ${item.submitter}: ${item.link}`)
+        LeetcodeSolution.find({ problemNumber: parseInt(command.arg(0))}, (err, result) => {
+            result.forEach((res) => {
+                command.message.channel.send(`Solution for #${parseInt(command.arg(0))}, submitted by <@${res.submitter}>: ${res.link}`)
+                if (isAuthorized(command.user)) {
+                    command.message.reply(`ID: ${res._id}`)
+                }
+            })
         })
     },
+    delete: function(command) {
+        LeetcodeSolution.find({ _id: command.arg(0)}).remove()
+    },
+    daily: function(command) {
+        command.message.reply(leetcode.dailyMessage())
+    }
 }
